@@ -17,8 +17,9 @@ st.markdown("Identifying earthquake-prone regions from historical data")
 
 # ─── LOAD DATA WITH POLARS ─────────────────────────────────────
 @st.cache_data
+@st.cache_data
 def load_data():
- df = pl.read_csv("earthquake.csv", infer_schema_length=10000, ignore_errors=True)
+    df = pl.read_csv("earthquake.csv", infer_schema_length=10000, ignore_errors=True)
     df = df.drop_nulls(subset=["latitude", "longitude", "mag"])
     df = df.filter(pl.col("mag") > 0)
     return df
